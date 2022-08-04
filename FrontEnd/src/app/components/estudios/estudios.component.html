@@ -1,0 +1,135 @@
+<section class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-11">
+        <h1 class="title">Educación</h1>
+        <i (click)="onOpenModal(null, 'add')" type="button" id="add-button" class="fa-solid fa-circle-plus"
+          *ngIf="isAdmin"></i>
+      </div>
+    </div>
+    <article>
+      <ul>
+        <div *ngFor="let est of estudios">
+          <div class="row">
+            <div class="col-2 d-flex justify-content-center">
+              <img width="90" height="90" src="{{est.urlLogo}}" alt="">
+            </div>
+            <div class="col-8">
+              <div class="card-title">
+                <h2 class="title-estudio">{{est.casaEstudios}}</h2>
+                <div class="card-text">
+                  <b>{{est.tituloEstudios}}</b>
+                  <br>
+                  <br>
+                  <i>{{est.periodo}}</i>
+                  <br>
+                  <br>
+                  <i (click)="onOpenModal(est,'edit')" type="button" id="edit-button" class="fa-solid fa-pen-to-square"
+                    *ngIf="isAdmin"></i>
+                  <i (click)="onOpenModal(est,'delete')" type="button" id="delete-button"
+                    class="fa-solid fa-circle-minus" *ngIf="isAdmin"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </article>
+  </div>
+</section>
+<hr>
+
+
+<!-- MODAL PARA AGREGAR ESTUDIOS -->
+<div class="modal fade" id="addEstudiosModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="addEstudiosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEstudiosModalLabel">Crear Educación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onCreateEstudios(addForm)">
+          <div class="form-group">
+            <label for="casaEstudios"></label>
+            <input type="text" ngModel name="casaEstudios" class="form-control" id="casaEstudios" placeholder="Nombre"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="tituloEstudios"></label>
+            <input type="text" ngModel name="tituloEstudios" class="form-control" id="tituloEstudios"
+              placeholder="Titulo Obtenido" required>
+          </div>
+          <div class="form-group">
+            <label for="periodo"></label>
+            <input type="text" ngModel name="periodo" class="form-control" id="periodo" placeholder="Periodo" required>
+          </div>
+          <div class="form-group">
+            <label for="urlLogo"></label>
+            <input type="text" ngModel name="urlLogo" class="form-control" id="urlLogo" placeholder="Logo URL" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL PARA EDITAR ESTUDIOS -->
+<div class="modal fade" id="editEstudiosModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="editEstudiosModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editEstudiosModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <label for="casaEstudios">Nombre</label><br>
+          <input ngModel type="text" ngModel="{{editEstudios?.casaEstudios}} " name="casaEstudios" class="form-control">
+          <label for="tituloEstudios">Titulo Obtenido</label><br>
+          <input type="text" name="tituloEstudios" ngModel="{{editEstudios?.tituloEstudios}}" class="form-control">
+          <label for="periodo">Periodo</label><br>
+          <input ngModel type="text" ngModel="{{editEstudios?.periodo}} " name="periodo" class="form-control">
+          <label for="urlLogo">Logo</label><br>
+          <input ngModel type="text" ngModel="{{editEstudios?.urlLogo}} " name="urlLogo" class="form-control">
+          <input type="hidden" name="id" ngModel="{{editEstudios?.id}} ">
+          <div class="modal-footer">
+            <button id="update-persona-modal" type="button" class="btn btn-secondary"
+              data-dismiss="modal">Cancelar</button>
+            <button (click)="onEditEstudios(editForm.value)" type="button" class="btn btn-primary"
+              data-dismiss="modal">Guardar
+              cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL PARA BORRAR ESTUDIOS-->
+<div class="modal fade" id="deleteEstudiosModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="deleteEstudiosModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteEstudiosModalLabel">Borrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Esta acción eliminará {{deleteEstudios?.casaEstudios}} . ¿Desea continuar?</p>
+      </div>
+      <div class="modal-footer borrar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button (click)="onDeleteEstudios(deleteEstudios.id)" type="button" class="btn btn-primary"
+          data-dismiss="modal">Sí</button>
+      </div>

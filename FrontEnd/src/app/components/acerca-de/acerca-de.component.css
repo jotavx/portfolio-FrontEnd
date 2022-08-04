@@ -1,0 +1,252 @@
+/* .edad {
+  color: antiquewhite;
+}
+
+.info-personal {
+  position: relative;
+  top: 30px;
+  left: 250px;
+}
+
+.nombre {
+  color: whitesmoke;
+  font-size: 40px;
+}
+
+.info-localidad {
+  color: antiquewhite;
+}
+
+.text-titulo {
+  color: antiquewhite;
+}
+
+.profile-photo {
+  position: absolute;
+  left: 160px;
+  top: 520px;
+  border-radius: 50%;
+  width: 185px;
+  height: 190px;
+}
+
+.text-sobremi {
+  position: relative;
+  padding: 20px;
+  width: 450px;
+  color: whitesmoke;
+}
+
+.title {
+  position: relative;
+  display: inline;
+  top: 15px;
+  left: 20px;
+  font-size: medium;
+  color: rgb(194, 146, 73);
+}
+
+#add-button {
+  position: relative;
+  top: 10px;
+  left: 5px;
+  font-size: 30px;
+  color: rgb(205, 231, 211);
+}
+
+#edit-button {
+  position: relative;
+  left: 40px;
+  color: lightgoldenrodyellow;
+  font-size: 30px;
+}
+
+#delete-button {
+  position: relative;
+  left: 40px;
+  font-size: 30px;
+  margin: 4px;
+  color: lightcoral;
+}
+
+@media screen and (max-width: 576px) {
+  .profile-photo {
+    position: absolute;
+    top: 530px;
+    left: 280px;
+  }
+
+  .nombre,
+  .info-localidad,
+  .info-personal {
+    position: relative;
+    top: 0;
+  }
+
+  .title {
+    position: relative;
+    top: 20px;
+    right: 25px;
+    text-transform: uppercase;
+  }
+  .text-sobremi {
+    position: relative;
+    top: 20px;
+    right: 25px;
+  }
+
+  #add-button {
+    position: relative;
+    top: 5px;
+    left: 2px;
+  }
+} */
+
+/*MGB STYLE*/
+.row {
+  padding: 20px;
+}
+
+/* ORIGINAL 17:57
+ .profile-photo {
+  position: absolute;
+  border-radius: 50%;
+  width: 185px;
+  height: 190px;
+  top: 310px;
+  left: 150px;
+} */
+
+/*  ORIGINAL 17:57
+#persona-nombre {
+  color: whitesmoke;
+  font-size: 40px;
+  position: relative;
+  left: 80px;
+  width: 350px;
+} */
+
+.persona-info {
+  color: antiquewhite;
+  text-align: initial;
+  position: relative;
+  left: 30px;
+}
+
+h1 {
+  font-size: medium;
+  color: rgb(194, 146, 73);
+  text-align: center;
+}
+
+#sobre-mi {
+  position: relative;
+  padding: 20px;
+  color: whitesmoke;
+  font-style: italic;
+  text-align: end;
+  width: 350px;
+}
+
+#edit-button {
+  position: relative;
+  left: 40px;
+  color: lightgoldenrodyellow;
+  font-size: 30px;
+}
+
+#delete-button {
+  position: relative;
+  left: 40px;
+  font-size: 30px;
+  margin: 4px;
+  color: lightcoral;
+}
+
+/* ORIGINAL 17:57
+#add-button {
+  position: relative;
+  top: 68px;
+  left: 50px;
+  font-size: 30px;
+  color: rgb(205, 231, 211);
+}
+*/
+
+#add-button {
+  position: relative;
+  top: 68px;
+  left: 10px;
+  font-size: 30px;
+  color: rgb(205, 231, 211);
+}
+
+#persona-nombre {
+  color: whitesmoke;
+  font-size: 40px;
+  position: relative;
+  left: 45px;
+  width: 350px;
+}
+
+.profile-photo {
+  position: absolute;
+  border-radius: 50%;
+  width: 185px;
+  height: 190px;
+  top: 310px;
+  left: 100px;
+}
+
+@media (min-width: 576px) {
+  .profile-photo {
+    position: absolute;
+    border-radius: 50%;
+    width: 185px;
+    height: 190px;
+    top: 350px;
+  }
+
+  #persona-nombre {
+    color: whitesmoke;
+    font-size: 40px;
+    position: relative;
+    left: 12px;
+    width: 350px;
+  }
+  .persona-info {
+    color: antiquewhite;
+    text-align: initial;
+    position: relative;
+    left: 30px;
+  }
+
+  h1 {
+    font-size: medium;
+    color: rgb(194, 146, 73);
+  }
+  #sobre-mi {
+    position: relative;
+    padding: 20px;
+    width: 450px;
+    color: whitesmoke;
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* #add-button {
+    position: relative;
+    top: 70px;
+    left: 280px;
+    font-size: 40px;
+    color: rgb(205, 231, 211);
+  } */
+
+  #add-button {
+    position: relative;
+    top: 70px;
+    left: 680px;
+    font-size: 40px;
+    color: rgb(205, 231, 211);
+  }
+}

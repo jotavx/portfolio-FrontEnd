@@ -1,0 +1,187 @@
+<!-- <section class="container" id="main-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-11">
+        <i (click)="onOpenModal(null, 'add')" type="button" id="add-button" class="fa-solid fa-circle-plus"
+          *ngIf="isAdmin"></i>
+      </div>
+    </div>
+    <article>
+      <ul>
+        <div *ngFor="let per of persona">
+          <div class="row">
+            <div>
+              <img src="{{per.img}}" alt="" class="profile-photo">
+            </div>
+            <div class=" col-8">
+              <div class="card-title">
+                <p class="nombre">{{per.nombre}} {{per.apellido}}</p>
+                <p class="edad">{{per.edad}}</p>
+                <div class="card-text">
+                  <p class="info-localidad">{{per.domicilio}}</p>
+                  <i class="text-titulo">{{per.titulo}}</i>
+                  <br>
+                  <h1 class="title">Sobre mí</h1>
+                  <p class="text-sobremi">{{per.sobremi}}</p>
+                  <i (click)="onOpenModal(per,'edit')" type="button" id="edit-button" class="fa-solid fa-pen-to-square"
+                    *ngIf="isAdmin"></i>
+                  <i (click)="onOpenModal(per,'delete')" type="button" id="delete-button"
+                    class="fa-solid fa-circle-minus" *ngIf="isAdmin"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </article>
+  </div>
+</section> -->
+
+
+<div id="main-container">
+  <i (click)="onOpenModal(null, 'add')" type="button" id="add-button" class="fa-solid fa-circle-plus" *ngIf="isAdmin">
+  </i>
+  <div *ngFor="let per of persona" class="row">
+    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+      <img src="{{per.img}}" alt="" class="profile-photo">
+    </div>
+    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+      <p id="persona-nombre">{{per.nombre}} {{per.apellido}}</p>
+      <div class="persona-info">{{per.edad}} <br> {{per.domicilio}}
+        <br>
+        <p>{{per.titulo}}</p>
+      </div>
+      <br>
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <span>
+          <h1>SOBRE MÍ</h1>
+          <p id="sobre-mi">{{per.sobremi}}</p>
+        </span>
+        <i (click)="onOpenModal(per,'edit')" type="button" id="edit-button" class="fa-solid fa-pen-to-square"
+          *ngIf="isAdmin"></i>
+        <i (click)="onOpenModal(per,'delete')" type="button" id="delete-button" class="fa-solid fa-circle-minus"
+          *ngIf="isAdmin"></i>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <hr>
+  <!-- MODAL PARA AGREGAR PERSONA -->
+  <div class="modal fade" id="addPersonaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="addPersonaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPersonaModalLabel">Crear perfil</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <h6>*NOTA: Algunos enlaces no son válidos y deben acortarse. (https://www.shorturl.at/)</h6>
+          <form #addForm="ngForm" (ngSubmit)="onCreatePersona(addForm)">
+            <div class="form-group">
+              <label for="nombre"></label>
+              <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="apellido"></label>
+              <input type="text" ngModel name="apellido" class="form-control" id="apellido" placeholder="Apellido"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="edad"></label>
+              <input type="text" ngModel name="edad" class="form-control" id="apellido" placeholder="Edad" required>
+            </div>
+            <div class="form-group">
+              <label for="domicilio"></label>
+              <input type="text" ngModel name="domicilio" class="form-control" id="domicilio" placeholder="Domicilio"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="titulo"></label>
+              <input type="text" ngModel name="titulo" class="form-control" id="titulo" placeholder="Titulo" required>
+            </div>
+            <div class="form-group">
+              <label for="sobremi"></label>
+              <input type="text" ngModel name="sobremi" class="form-control" id="sobremi" placeholder="Sobre mi"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="img"></label>
+              <input type="text" ngModel name="img" class="form-control" id="img" placeholder="URL Imagen" required>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="add-employee-form" class="btn btn-secondary"
+                data-dismiss="modal">Cerrar</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL PARA EDITAR PERSONA -->
+  <div class="modal fade" id="editPersonaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="editPersonaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPersonaModalLabel">Editar Perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #editForm="ngForm">
+            <label for="nombre">Nombre</label><br>
+            <input ngModel type="text" ngModel="{{editPersona?.nombre}} " name="nombre" class="form-control">
+            <label for="apellido">Apellido</label><br>
+            <input type="text" name="apellido" ngModel="{{editPersona?.apellido}}" class="form-control">
+            <label for="edad">Edad</label><br>
+            <input type="text" name="edad" ngModel="{{editPersona?.edad}}" class="form-control">
+            <label for="titulo">Titulo</label><br>
+            <input ngModel type="text" ngModel="{{editPersona?.titulo}} " name="titulo" class="form-control">
+            <label for="domicilio">Domicilio</label><br>
+            <input ngModel type="text" ngModel="{{editPersona?.domicilio}} " name="domicilio" class="form-control">
+            <label for="sobremi">Sobre mí</label><br>
+            <input ngModel type="text" ngModel="{{editPersona?.sobremi}} " name="sobremi" class="form-control">
+            <label for="img">URL Imagen</label><br>
+            <input ngModel type="text" ngModel="{{editPersona?.img}} " name="img" class="form-control">
+            <input type="hidden" name="id" ngModel="{{editPersona?.id}} ">
+            <div class="modal-footer">
+              <button id="update-persona-modal" type="button" class="btn btn-secondary"
+                data-dismiss="modal">Cancelar</button>
+              <button (click)="onEditPersona(editForm.value)" type="button" class="btn btn-primary"
+                data-dismiss="modal">Guardar
+                cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL PARA BORRAR PERSONA-->
+  <div class="modal fade" id="deletePersonaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="deletePersonaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletePersonaModalLabel">Borrar perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Esta acción eliminará el perfil de {{deletePersona?.nombre}} . ¿Desea continuar?</p>
+        </div>
+        <div class="modal-footer borrar">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeletePersona(deletePersona.id)" type="button" class="btn btn-primary"
+            data-dismiss="modal">Sí</button>
+        </div>

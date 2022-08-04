@@ -1,0 +1,48 @@
+h2 {
+  color: cornsilk;
+}
+
+.row {
+  padding: 20px;
+  color: white;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  font-family: "Poppins";
+}
+
+#add-button {
+  position: relative;
+  left: 240px;
+  bottom: 55px;
+  font-size: 40px;
+  color: rgb(205, 231, 211);
+}
+
+#edit-button {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+}
+
+#delete-button {
+  font-size: 30px;
+  color: lightcoral;
+  margin: 4px;
+}
+
+@media screen and (max-width: 1200px) {
+  #add-button {
+    position: relative;
+    left: 0;
+    top: 10px;
+  }
+
+  .card-title,
+  .card-text,
+  .title-proyectos {
+    margin-left: 20px;
+  }
+}

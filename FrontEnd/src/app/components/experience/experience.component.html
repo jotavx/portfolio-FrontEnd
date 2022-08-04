@@ -1,0 +1,133 @@
+<section class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-11">
+        <h1 class="title">Experiencia</h1>
+        <i (click)="onOpenModal(null, 'add')" type="button" id="add-button" class="fa-solid fa-circle-plus"
+          *ngIf="isAdmin"></i>
+      </div>
+    </div>
+    <article>
+      <ul>
+        <div *ngFor="let exp of experiencia">
+          <div class="row">
+            <div class="col-2 d-flex justify-content-center">
+              <img width="90" height="90" src="{{exp.logo}}" alt="">
+            </div>
+            <div class="col-8">
+              <div class="card-title">
+                <h2 class="title-experiencia">{{exp.nombre}}</h2>
+                <div class="card-text">
+                  {{exp.descripcion}}
+                  <br>
+                  <br>
+                  <i>{{exp.periodo}}</i>
+                  <br>
+                  <br>
+                  <i (click)="onOpenModal(exp,'edit')" type="button" id="edit-button" class="fa-solid fa-pen-to-square"
+                    *ngIf="isAdmin"></i>
+                  <i (click)="onOpenModal(exp,'delete')" type="button" id="delete-button"
+                    class="fa-solid fa-circle-minus" *ngIf="isAdmin"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </article>
+  </div>
+</section>
+<hr>
+
+<!-- MODAL PARA AGREGAR EXPERIENCIA -->
+<div class="modal fade" id="addExperienciaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="addExperienciaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addExperienciaModalLabel">Crear Experiencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onCreateExperiencia(addForm)">
+          <div class="form-group">
+            <label for="nombre"></label>
+            <input type="text" ngModel name="nombre" class="form-control" id="nombre" placeholder="Nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="descripcion"></label>
+            <input type="text" ngModel name="descripcion" class="form-control" id="descripcion"
+              placeholder="Descripcion" required>
+          </div>
+          <div class="form-group">
+            <label for="periodo"></label>
+            <input type="text" ngModel name="periodo" class="form-control" id="periodo" placeholder="Periodo" required>
+          </div>
+          <div class="form-group">
+            <label for="logo"></label>
+            <input type="text" ngModel name="logo" class="form-control" id="logo" placeholder="Logo URL" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL PARA EDITAR EXPERIENCIA -->
+<div class="modal fade" id="editExperienciaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="editExperienciaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editExperienciaModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <label for="nombre">Nombre</label><br>
+          <input ngModel type="text" ngModel="{{editExperiencia?.nombre}} " name="nombre" class="form-control">
+          <label for="descripcion">Descripcion</label><br>
+          <input type="text" name="descripcion" ngModel="{{editExperiencia?.descripcion}}" class="form-control">
+          <label for="periodo">Periodo</label><br>
+          <input ngModel type="text" ngModel="{{editExperiencia?.periodo}} " name="periodo" class="form-control">
+          <label for="logo">Logo</label><br>
+          <input ngModel type="text" ngModel="{{editExperiencia?.logo}} " name="logo" class="form-control">
+          <input type="hidden" name="id" ngModel="{{editExperiencia?.id}} ">
+          <div class="modal-footer">
+            <button id="update-persona-modal" type="button" class="btn btn-secondary"
+              data-dismiss="modal">Cancelar</button>
+            <button (click)="onEditExperiencia(editForm.value)" type="button" class="btn btn-primary"
+              data-dismiss="modal">Guardar
+              cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL PARA BORRAR EXPERIENCIA-->
+<div class="modal fade" id="deleteExperienciaModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="deleteExperienciaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteExperienciaModalLabel">Borrar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Esta acción eliminará {{deleteExperiencia?.nombre}} . ¿Desea continuar?</p>
+      </div>
+      <div class="modal-footer borrar">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button (click)="onDeleteExperiencia(deleteExperiencia.id)" type="button" class="btn btn-primary"
+          data-dismiss="modal">Sí</button>
+      </div>
